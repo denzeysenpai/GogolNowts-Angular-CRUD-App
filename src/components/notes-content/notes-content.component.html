@@ -1,0 +1,11 @@
+<main class="note-card">
+  <div class="title-area">
+    <input type="text" placeholder="Untitled" [value]="title">
+  </div>
+  <div class="text-area">
+    <textarea name="output" id="" >{{content}}</textarea>
+  </div>
+  <div class="tool-bar">
+    <app-tools-and-actions [isACard]="isACard"></app-tools-and-actions>
+  </div>
+</main>

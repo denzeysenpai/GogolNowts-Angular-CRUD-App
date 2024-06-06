@@ -1,0 +1,74 @@
+.take-notes-box {
+  max-width: 700px;
+  min-width: 700px;
+  border: 3px solid rgb(0, 0, 0);
+  border-radius: 16px;
+  height: fit-content;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  box-shadow: 10px 8px 0px rgb(0, 0, 0);
+  inset: 0;
+  margin: auto;
+  background-color: white;
+  overflow: hidden;
+
+  .rows {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+  }
+
+  input, textarea {
+    margin: 10px 10px 10px 10px;
+    height: fit-content;
+    flex-grow: 10;
+    width: 92%;
+    padding: 10px;
+    /* resize: none; */
+    resize: vertical;
+    font-size: 14px;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.568);
+    border: 1px solid rgba(148, 148, 148, 0.308);
+    overflow: hidden;
+  }
+
+  input {
+    display: none;
+  }
+
+  textarea {
+    min-height: 80px;
+  }
+
+  app-tools-and-actions {
+    width: 100%;
+    inset: 0;
+    margin: 0;
+    display: none;
+  }
+
+  #colorBlob {
+    display: block;
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0);
+    margin: auto;
+    z-index: 0;
+    border-radius: 100%;
+    transition: all 0.7s ease;
+    }
+
+  #colorBlob.active {
+    transform: scale(40);
+    /* height: 1240px;
+    width: 1240px; */
+  }
+
+  form {
+    z-index: 2;
+  }
+
+}

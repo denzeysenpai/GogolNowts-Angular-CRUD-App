@@ -1,0 +1,32 @@
+<main class="tools-content">
+  <div class="color-selector-holder">
+    <!-- @if (isACard) {
+      <span class="white" id="white" style="border-color: white;"></span>
+      <span class="white" id="white" style="border-color: white;"></span>
+      <span class="white" id="white" style="border-color: white;"></span>
+      <span class="white" id="white" style="border-color: white;"></span>
+      <span class="white" id="white" style="border-color: white;"></span>
+      <span class="white" id="white" style="border-color: white;"></span>
+      <span class="white" id="white" style="border-color: white;"></span>
+    }
+    @else {
+    } -->
+    <span (click)="Set('pink')" class="pink" id="pink"></span>
+    <span (click)="Set('red')" class="red" id="red"></span>
+    <span (click)="Set('orange')" class="orange" id="orange"></span>
+    <span (click)="Set('blue')" class="blue" id="blue"></span>
+    <span (click)="Set('violet')" class="violet" id="violet"></span>
+    <span (click)="Set('green')" class="green" id="green"></span>
+    <span (click)="Set('white')" class="white" id="white"></span>
+  </div>
+  <div class="button-holder">
+    <a class="button" (click)="HideOthers()">{{buttonText1}}</a>
+    <a class="button" (click)="Submit()">{{buttonText2}}</a>
+    <a class="button" (click)="Clear()">{{buttonText3}}</a>
+    <!-- @if(isACard) {
+      <a class="button" (click)="Delete('')">{{buttonText4}}</a>
+    }
+    @else {
+    } -->
+  </div>
+</main>
