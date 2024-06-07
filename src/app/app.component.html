@@ -22,11 +22,12 @@
       <div class="main-content-container">
         <section class="header-spacer"></section>
           <section class="input-section">
-            <app-notes-input-box (newItemEvent)="onSubmit($event)"></app-notes-input-box>
+            <app-notes-input-box></app-notes-input-box>
           </section>
 
           <section class="content-output-section">
              <app-output-table [record]="records"></app-output-table>
+
           </section>
       </div>
   </div>

@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { emit } from 'process';
+import { DataService } from '../../services/data.service';
 // import { NotesContentComponent } from '../notes-content/notes-content.component';
 // import { FormControl } from '@angular/forms';
 
@@ -12,6 +13,7 @@ import { emit } from 'process';
   styleUrl: './tools-and-actions.component.css'
 })
 export class ToolsAndActionsComponent {
+  selectedColor = 'white'
   buttonText1 = 'Close'
   buttonText2 = 'Submit'
   buttonText3 = 'Clear'
@@ -19,6 +21,28 @@ export class ToolsAndActionsComponent {
   @Input() isACard : boolean = false;
   @Output() output : any;
   @Output() newItemEvent = new EventEmitter<string>();
+  collection:string[]=[]
+
+  private serv = new DataService()
+
+  constructor(private data:DataService) {}
+
+  Submit() : void {
+    // this.data.dataAdapter.subscribe(collection => this.collection = collection);
+    this.newItemEvent.emit(this.selectedColor)
+    console.log('Submit Event Started')
+    this.serv.executeCommand()
+    this.serv.default()
+
+    const blob = document.getElementById('colorBlob');
+    if (blob != undefined && blob != null) {
+      if (blob.className.includes('active')) {
+        blob.classList.toggle('active');
+        blob.style.opacity = '0'
+        }
+    }
+    this.selectedColor = 'white'
+  }
 
   Close() {
 
@@ -39,6 +63,10 @@ export class ToolsAndActionsComponent {
       bottomBar.style.display = 'none';
       textArea.style.height = '80px';
       title.style.display = 'none';
+      let inp = title.querySelector('#title-input')
+      if(inp!=null) {
+        inp.setAttribute('value', '')
+      }
     }
   }
 
@@ -52,9 +80,7 @@ export class ToolsAndActionsComponent {
     }
   }
 
-  Submit() : void {
-    this.newItemEvent.emit('submit');
-  }
+
 
   delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
@@ -66,14 +92,16 @@ export class ToolsAndActionsComponent {
       if (blob.className.includes('active')) {
         blob.classList.toggle('active');
         await this.delay(600);
+        this.selectedColor = 'white'
       }
-
+      blob.style.opacity = '1'
       blob.classList.toggle('active');
     }
   }
 
   Set(color : string) :void {
     const noteCol = document.getElementById('colorBlob');
+    this.selectedColor = color
     if (noteCol != undefined && noteCol != null) {
       switch(color) {
         case 'pink':

@@ -13,7 +13,7 @@
     border-radius: 10px;
   }
 
-  td {
+  .td {
     padding: 10px 34px;
     max-width: 190px;
     background-color: rgba(0, 0, 0, 0.089);
@@ -21,4 +21,9 @@
   }
 
 
+}
+
+
+.remove-button  {
+  background-color: aliceblue;
 }

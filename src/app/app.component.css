@@ -51,6 +51,7 @@ app-notes-input-box {
     box-shadow: 8px 8px 0px black;
     cursor: pointer;
     transition: all 0.18s ease;
+    overflow: hidden;
   }
 
   img:hover {
@@ -59,8 +60,17 @@ app-notes-input-box {
     box-shadow: 0px 0px 0px black;
     cursor: pointer;
     transition: all 0.18s ease;
-
   }
+
+  img:active {
+    border-color: yellow;
+    transform: rotate(45deg);
+    border-radius: 100%;
+  }
+/*
+   {
+    background-color: aqua;
+  } */
 }
 
 .header-bar {

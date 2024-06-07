@@ -4,6 +4,7 @@ import { NotesInputBoxComponent } from '../components/notes-input-box/notes-inpu
 import { NotesContentComponent } from '../components/notes-content/notes-content.component'
 import { SearchBarComponent } from '../components/search-bar/search-bar.component'
 import { FormsModule } from '@angular/forms';
+import { DataService } from '../services/data.service';
 import { OutputTableComponent } from '../components/output-table/output-table.component'
 @Component({
   selector: 'app-root',
@@ -24,8 +25,12 @@ export class AppComponent {
   noteCard = true;
   records : string[][] = []
 
+  constructor(private da : DataService) {}
+
   onSubmit(value : string[]) {
     this.records.push(value)
     console.log(value)
+    this.da.command.subscribe()
+
   }
 }
