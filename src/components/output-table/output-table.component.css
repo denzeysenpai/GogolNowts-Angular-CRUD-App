@@ -1,4 +1,4 @@
-.table-generic {
+.table-content {
   padding: 11px;
   border: 3px solid black;
   border-radius: 18px;
@@ -6,6 +6,7 @@
   width: fit-content;
   height: fit-content;
   background-color: white;
+  text-align: right;
 
   th {
     padding: 10px 34px;
@@ -17,9 +18,15 @@
     padding: 10px 34px;
     max-width: 190px;
     background-color: rgba(0, 0, 0, 0.089);
-    border-radius: 10px;
+    border-radius: 10px; 
   }
 
+  input, button {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    margin: 10px 1px;
+  }
 
 }
 

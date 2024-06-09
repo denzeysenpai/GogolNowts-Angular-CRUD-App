@@ -24,55 +24,38 @@ export class DataService {
   private totalRecords = new BehaviorSubject<string[][]>([])
   rec = this.totalRecords.asObservable()
 
+  // Records
+  notesRecord : any = new Set()
   private RecordObject = new BehaviorSubject<obj[]>([])
-
   objectRecords : obj[] = []
   rOb = this.RecordObject.asObservable()
-
-
   records : string[][] = []
 
   constructor() { }
 
-  removeInRecord(id:string) {
-    let dumbAssWayOfDeletingSomething : obj[] = []
-    this.RecordObject.forEach(object => {
-      let index = 0
-      for(let i = 0; i < object.length; i++) {
-        if(object[i].id == id) {
-          index == i
-          break
-        }
-      }
-
-      for(let reallyDumbButIDontKnowAnyOtherWay = 0; reallyDumbButIDontKnowAnyOtherWay < object.length - 1; reallyDumbButIDontKnowAnyOtherWay++) {
-        if(reallyDumbButIDontKnowAnyOtherWay != index) {
-          dumbAssWayOfDeletingSomething.push(object[reallyDumbButIDontKnowAnyOtherWay]);
-        }
+  removeInRecord(id : string) {
+    console.log('Remove function called!')
+    this.notesRecord.forEach((element: { id: string; }) => {
+      if(element.id == id) {
+        this.notesRecord.delete(element)
+        console.log('Removed task: ' + element.id)
       }
     })
-
-    this.RecordObject.next(dumbAssWayOfDeletingSomething)
+    this.RecordObject.next(this.notesRecord)
   }
 
   createAndInsertObject(id: string, title: string, description: string, date: string, status: string, color: string) {
     let object : obj;
-    object = {
-      id: id, title: title, description: description, date: date, status: status, color: color
-    }
-
-    this.objectRecords.push(object)
-    this.RecordObject.next(this.objectRecords)
+    object = { id: id, title: title, description: description, date: date, status: status, color: color }
+    this.notesRecord.add(object)
+    this.RecordObject.next(this.notesRecord)
+    console.log(this.notesRecord)
   }
 
   injectToAdapter(collection : string[]) {
     this.dataSource.next(collection);
     console.log('Service responded and received: ' + collection)
     this.records.push(collection)
-  }
-
-  getCollection() : string[][] {
-    return this.records
   }
 
   SetCommand(comm : any) {

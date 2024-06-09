@@ -29,8 +29,6 @@ export class NotesInputBoxComponent implements OnInit {
 
 
 
-
-
   ngOnInit() {
     this.data.dataAdapter.subscribe(collection => this.collection = collection);
     console.log('ngOnInit called in NotesInputBoxComponent')
@@ -48,17 +46,13 @@ export class NotesInputBoxComponent implements OnInit {
     // console.log('Data transfer for: ' + this.collection)
     this.id++
 
-    let t = document.getElementsByName('title-input')
+    let t = document.getElementById('title-input') as HTMLInputElement
     let c = document.querySelector('textarea')
     if (t != null && c != null) {
-      // t.value = ''
+      t.value = ''
       c.value = ''
       }
-
       this.data.sendEvent();
-
-
-
   }
 
 

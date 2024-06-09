@@ -1,5 +1,6 @@
 <main class="table-content">
-  <table [className]="cname" [id]="cname" (click)="UpdateDataTable()">
+  <input type="number" placeholder="ID to delete" id="deleteIdInput"><button (click)="DeleteThis()">Delete</button>
+  <table [className]="cname" [id]="cname">
     <tbody>
         <!-- <tr>
           <th>ID</th>
@@ -10,6 +11,6 @@
           <th>Check</th>
         </tr> -->
         <!-- <app-table-row id="" title="" desc="" status="" date="" color="red"></app-table-row> -->
-    </tbody>
+    </tbody >
   </table>
 </main>

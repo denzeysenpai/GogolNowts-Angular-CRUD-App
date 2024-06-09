@@ -18,16 +18,16 @@ export class ToolsAndActionsComponent {
   buttonText2 = 'Submit'
   buttonText3 = 'Clear'
   buttonText4 = 'Delete'
-  @Input() isACard : boolean = false;
-  @Output() output : any;
+  @Input() isACard: boolean = false;
+  @Output() output: any;
   @Output() newItemEvent = new EventEmitter<string>();
-  collection:string[]=[]
+  collection: string[] = []
 
   private serv = new DataService()
 
-  constructor(private data:DataService) {}
+  constructor(private data: DataService) { }
 
-  Submit() : void {
+  Submit(): void {
     // this.data.dataAdapter.subscribe(collection => this.collection = collection);
     this.newItemEvent.emit(this.selectedColor)
     console.log('Submit Event Started')
@@ -39,42 +39,43 @@ export class ToolsAndActionsComponent {
       if (blob.className.includes('active')) {
         blob.classList.toggle('active');
         blob.style.opacity = '0'
-        }
+      }
     }
     this.selectedColor = 'white'
+    this.Clear()
   }
 
   Close() {
-
+    this.HideOthers()
   }
 
-  Delete(id : string) {
+  // Delete(id : string) {
 
-  }
+  // }
 
 
 
-  HideOthers() : void {
+  HideOthers(): void {
     const title = document.getElementById('title-input');
     const bottomBar = document.getElementById('tools-and-actions');
     const textArea = document.getElementById('notes-content');
 
-    if((textArea != undefined && textArea != null) &&(title != undefined && title != null) && (bottomBar != undefined && bottomBar != null)) {
+    if ((textArea != undefined && textArea != null) && (title != undefined && title != null) && (bottomBar != undefined && bottomBar != null)) {
       bottomBar.style.display = 'none';
       textArea.style.height = '80px';
       title.style.display = 'none';
       let inp = title.querySelector('#title-input')
-      if(inp!=null) {
+      if (inp != null) {
         inp.setAttribute('value', '')
       }
     }
   }
 
-  Clear() : void {
+  Clear(): void {
     const title = document.getElementById('title-input');
     const textArea = document.getElementById('notes-content');
 
-    if((textArea != undefined && textArea != null) &&(title != undefined && title != null)) {
+    if ((textArea != undefined && textArea != null) && (title != undefined && title != null)) {
       textArea.nodeValue = '';
       title.textContent = '';
     }
@@ -83,7 +84,7 @@ export class ToolsAndActionsComponent {
 
 
   delay(ms: number) {
-    return new Promise( resolve => setTimeout(resolve, ms) );
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   async ToggleBlob() {
@@ -99,34 +100,21 @@ export class ToolsAndActionsComponent {
     }
   }
 
-  Set(color : string) :void {
+  Set(color: string): void {
     const noteCol = document.getElementById('colorBlob');
     this.selectedColor = color
     if (noteCol != undefined && noteCol != null) {
-      switch(color) {
-        case 'pink':
-          noteCol.style.backgroundColor = 'pink';
-          break;
-        case 'red':
-          noteCol.style.backgroundColor = 'rgb(255, 30, 30)';
-          break;
-        case 'orange':
-          noteCol.style.backgroundColor = 'orange';
-          break;
-        case 'blue':
-          noteCol.style.backgroundColor = 'rgb(0, 81, 255)';
-          break;
-        case 'violet':
-          noteCol.style.backgroundColor = 'violet';
-          break;
-        case 'green':
-          noteCol.style.backgroundColor = 'rgb(37, 226, 37)';
-          break;
-        case 'white':
-          noteCol.style.backgroundColor = 'white';
-          break;
+      switch (color) {
+        case 'pink': noteCol.style.backgroundColor = 'pink'; break
+        case 'red': noteCol.style.backgroundColor = 'rgba(255, 30, 30, 0.44)'; break;
+        case 'orange': noteCol.style.backgroundColor = 'rgba(255, 180, 41, 0.44)'; break;
+        case 'blue': noteCol.style.backgroundColor = 'rgba(0, 81, 255, 0.44)'; break;
+        case 'violet': noteCol.style.backgroundColor = 'rgba(169, 80, 252, 0.44)'; break;
+        case 'green': noteCol.style.backgroundColor = 'rgba(37, 226, 37, 0.44)'; break;
+        case 'white': noteCol.style.backgroundColor = 'white'; break;
+        default: noteCol.style.backgroundColor = 'white'; break;
       }
-      this.ToggleBlob();
     }
+    this.ToggleBlob();
   }
 }

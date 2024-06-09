@@ -4,6 +4,7 @@ import { DataService } from '../../services/data.service';
 import { Subscription } from 'rxjs'
 import { TableRowComponent } from '../table-row/table-row.component'
 import { TemplateLiteral, TemplateLiteralElement } from '@angular/compiler';
+import { __values } from 'tslib';
 
 interface obj {
   id: string;
@@ -34,14 +35,13 @@ export class OutputTableComponent implements OnInit {
   records: string[][] = this.record
   @Output() newItemEvent = new EventEmitter<string[]>();
 
-  objectRec: obj[] = []
+  objectRec : obj[] = []
   clickEventsubscription: Subscription;
 
   constructor(private data: DataService) {
     this.clickEventsubscription = this.data.receiveEvent().subscribe(() => {
       this.UpdateDataTable();
     })
-
   }
   cname = 'table-generic'
 
@@ -49,11 +49,9 @@ export class OutputTableComponent implements OnInit {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-
   async ngOnInit() {
     this.data.dataAdapter.subscribe(collection => this.collection = collection);
     console.log('ngOnInit called in OutputTableComponent')
-    this.newItemEvent.emit()
     this.data.rOb.subscribe(record => this.objectRec = record)
 
     // this.data.SetCommand(this.UpdateDataTable())
@@ -63,42 +61,31 @@ export class OutputTableComponent implements OnInit {
     const noteCol = document.getElementById('colorBlob');
     if (noteCol != undefined && noteCol != null) {
       switch (color) {
-        case 'pink':
-          return 'pink';
-        case 'red':
-          return 'rgba(255, 30, 30, 0.8)';
-
-        case 'orange':
-          return 'orange';
-
-        case 'blue':
-          return 'rgba(0, 81, 255, 0.8)';
-
-        case 'violet':
-          return 'violet';
-
-        case 'green':
-          return 'rgba(37, 226, 37, 0.8)';
-
-        case 'white':
-          return 'white';
-
-        default:
-          return ''
+        case 'pink': return 'pink';
+        case 'red': return 'rgba(255, 30, 30, 0.44)'; 
+        case 'orange': return 'rgba(255, 180, 41, 0.44)'; 
+        case 'blue': return 'rgba(0, 81, 255, 0.44)'; 
+        case 'violet': return 'rgba(169, 80, 252, 0.44)'; 
+        case 'green': return 'rgba(37, 226, 37, 0.44)'; 
+        case 'white': return 'white'; 
+        default: return ''
       }
 
-    } else { return '' }
+    } 
+    else return '' 
   }
-
-  public DeleteThis(id: string) {
-    this.data.removeInRecord(id);
+  public DeleteThis() { 
+    let inp = document.querySelector('#deleteIdInput') as HTMLInputElement
+    if(inp != undefined && inp != null) {
+      this.data.removeInRecord(inp.value == null || inp.value == undefined ? '' : inp.value); 
+      console.log(inp.value)
+      inp.value = ''
+    }
+    this.UpdateDataTable()
   }
-
   public UpdateDataTable() {
     console.log('UpdateDataTable called')
     let table = document.querySelector('tbody')
-
-
     if (table != null) {
       table.innerHTML = `
         <tbody>
@@ -108,29 +95,20 @@ export class OutputTableComponent implements OnInit {
             <th style="padding: 10px 34px; border: 1px solid rgba(128, 128, 128, 0.473); border-radius: 10px;">Description</th>
             <th style="padding: 10px 34px; border: 1px solid rgba(128, 128, 128, 0.473); border-radius: 10px;">Date</th>
             <th style="padding: 10px 34px; border: 1px solid rgba(128, 128, 128, 0.473); border-radius: 10px;">Status</th>
-            <th style="padding: 10px 34px; border: 1px solid rgba(128, 128, 128, 0.473); border-radius: 10px;">Check</th>
           </tr>
         </tbody>`
     }
     this.objectRec.forEach(object => {
       const rowHtml = `
-      <tr>
+            <tr>
               <td style="padding: 10px 34px; max-width: 190px; border-radius: 10px; background-color: `+ this.Set(object.color) + `;">` + object.id + `</th>
               <td style="padding: 10px 34px; max-width: 190px; border-radius: 10px; background-color: `+ this.Set(object.color) + `;">` + object.title + `</th>
               <td style="padding: 10px 34px; max-width: 190px; border-radius: 10px; background-color: `+ this.Set(object.color) + `;">` + object.description + `</th>
               <td style="padding: 10px 34px; max-width: 190px; border-radius: 10px; background-color: `+ this.Set(object.color) + `;">` + object.date + `</th>
               <td style="padding: 10px 34px; max-width: 190px; border-radius: 10px; background-color: `+ this.Set(object.color) + `;">` + object.status + `</th>
-              <td style="padding: 10px 34px; max-width: 190px; border-radius: 10px; background-color: `+ this.Set(object.color) + `;">
-              <button onclick="DeleteThis('1')" class="remove-button" style="padding: 10px 34px; background-color: transparent; color: black; cursor: pointer; border: none;" id="` + object.id + `">REMOVE</th>
             </tr>
             `
-      if (table != null && table != undefined) {
-        table.innerHTML = table.innerHTML + rowHtml
-      }
-      let buttons = document.querySelectorAll('.remove-button')
-      buttons.forEach(button => {
-        button.setAttribute('class', 'remove-button')
-      })
+      if (table != null && table != undefined) table.innerHTML = table.innerHTML + rowHtml
     })
   }
 
