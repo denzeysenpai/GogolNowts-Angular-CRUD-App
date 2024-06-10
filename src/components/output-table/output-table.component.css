@@ -18,7 +18,7 @@
     padding: 10px 34px;
     max-width: 190px;
     background-color: rgba(0, 0, 0, 0.089);
-    border-radius: 10px; 
+    border-radius: 10px;
   }
 
   input, button {
@@ -26,6 +26,8 @@
     border-radius: 5px;
     border: 1px solid gray;
     margin: 10px 1px;
+    display: none;
+    flex-wrap: wrap;
   }
 
 }

@@ -37,7 +37,7 @@ export class NotesInputBoxComponent implements OnInit {
 
 
   onSubmit(value: string, title: string, description: string) {
-    this.newItemEvent.emit([]);
+    this.newItemEvent.emit(this.collection);
 
     this.data.createAndInsertObject(String(this.id), title, description, 'Date to be added', 'In progress', value)
     console.log('inputBoxIsCommunicating: ' + value)

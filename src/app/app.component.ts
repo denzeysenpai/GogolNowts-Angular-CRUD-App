@@ -5,7 +5,10 @@ import { NotesContentComponent } from '../components/notes-content/notes-content
 import { SearchBarComponent } from '../components/search-bar/search-bar.component'
 import { FormsModule } from '@angular/forms';
 import { DataService } from '../services/data.service';
+import { LoginPageComponent } from '../components/login-page/login-page.component';
 import { OutputTableComponent } from '../components/output-table/output-table.component'
+import { HomePageComponent } from '../components/home-page/home-page.component';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -15,7 +18,9 @@ import { OutputTableComponent } from '../components/output-table/output-table.co
     NotesInputBoxComponent,
     SearchBarComponent,
     FormsModule,
-    OutputTableComponent
+    OutputTableComponent,
+    LoginPageComponent,
+    HomePageComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

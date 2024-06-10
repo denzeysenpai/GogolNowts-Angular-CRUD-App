@@ -29,6 +29,7 @@ export class OutputTableComponent implements OnInit {
   @Input() date = 'Date Created'
   @Input() status = 'Note/Task Status'
   @Input() record: string[][] = [['1', '2', '3', '4', '5'], ['1', '2', '3', '4', '5'], ['1', '2', '3', '4', '5']]
+  cname = 'table-generic'
   completed = false
 
   collection: string[] = []
@@ -40,10 +41,9 @@ export class OutputTableComponent implements OnInit {
 
   constructor(private data: DataService) {
     this.clickEventsubscription = this.data.receiveEvent().subscribe(() => {
-      this.UpdateDataTable();
+      this.UpdateDataTable('');
     })
   }
-  cname = 'table-generic'
 
   delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -62,28 +62,27 @@ export class OutputTableComponent implements OnInit {
     if (noteCol != undefined && noteCol != null) {
       switch (color) {
         case 'pink': return 'pink';
-        case 'red': return 'rgba(255, 30, 30, 0.44)'; 
-        case 'orange': return 'rgba(255, 180, 41, 0.44)'; 
-        case 'blue': return 'rgba(0, 81, 255, 0.44)'; 
-        case 'violet': return 'rgba(169, 80, 252, 0.44)'; 
-        case 'green': return 'rgba(37, 226, 37, 0.44)'; 
-        case 'white': return 'white'; 
+        case 'red': return 'rgba(255, 30, 30, 0.44)';
+        case 'orange': return 'rgba(255, 180, 41, 0.44)';
+        case 'blue': return 'rgba(0, 81, 255, 0.44)';
+        case 'violet': return 'rgba(169, 80, 252, 0.44)';
+        case 'green': return 'rgba(37, 226, 37, 0.44)';
+        case 'white': return 'white';
         default: return ''
       }
-
-    } 
-    else return '' 
+    }
+    else return ''
   }
-  public DeleteThis() { 
+  public DeleteThis() {
     let inp = document.querySelector('#deleteIdInput') as HTMLInputElement
     if(inp != undefined && inp != null) {
-      this.data.removeInRecord(inp.value == null || inp.value == undefined ? '' : inp.value); 
+      this.data.removeInRecord(inp.value == null || inp.value == undefined ? '' : inp.value);
       console.log(inp.value)
       inp.value = ''
     }
-    this.UpdateDataTable()
+    this.UpdateDataTable('')
   }
-  public UpdateDataTable() {
+  UpdateDataTable(collection : any) {
     console.log('UpdateDataTable called')
     let table = document.querySelector('tbody')
     if (table != null) {
@@ -110,7 +109,16 @@ export class OutputTableComponent implements OnInit {
             `
       if (table != null && table != undefined) table.innerHTML = table.innerHTML + rowHtml
     })
+
+    let deleteInput = document.getElementById('deleteIdInput')
+    let deleteButton = document.getElementById('deleteIdButton')
+
+    if (deleteInput != undefined && deleteButton != undefined) {
+      deleteInput.style.display = 'flex'
+      deleteButton.style.display = 'flex'
+    }
   }
+
 
 
 
