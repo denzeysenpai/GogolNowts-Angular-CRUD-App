@@ -24,7 +24,8 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              }, "src/media"
+              },
+              "src/media"
             ],
             "styles": [
               "src/styles.css"
@@ -87,19 +88,68 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              }
-              ,"src/media"
+              },
+              "src/media"
             ],
             "styles": [
               "src/styles.css"
             ],
             "scripts": []
           }
+        },
+        "cypress-run": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "GogolNowts:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "GogolNowts:serve:production"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "watch": true,
+            "headless": false
+          }
+        },
+        "ct": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "GogolNowts:serve",
+            "watch": true,
+            "headless": false,
+            "testingType": "component"
+          },
+          "configurations": {
+            "development": {
+              "devServerTarget": "GogolNowts:serve:development"
+            }
+          }
+        },
+        "e2e": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "GogolNowts:serve",
+            "watch": true,
+            "headless": false
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "GogolNowts:serve:production"
+            }
+          }
         }
       }
     }
   },
   "cli": {
-    "analytics": "97f1d23d-f39d-4b4d-9de7-d15682a0a386"
+    "analytics": "97f1d23d-f39d-4b4d-9de7-d15682a0a386",
+    "schematicCollections": [
+      "@cypress/schematic",
+      "@schematics/angular"
+    ]
   }
 }
