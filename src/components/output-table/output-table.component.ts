@@ -3,7 +3,7 @@ import { Component, Input, NgModule, OnInit, Output, EventEmitter } from '@angul
 import { DataService } from '../../services/data.service';
 import { Subscription } from 'rxjs'
 import { TableRowComponent } from '../table-row/table-row.component'
-import { TemplateLiteral, TemplateLiteralElement } from '@angular/compiler';
+// import { TemplateLiteral, TemplateLiteralElement } from '@angular/compiler';
 import { __values } from 'tslib';
 
 interface obj {

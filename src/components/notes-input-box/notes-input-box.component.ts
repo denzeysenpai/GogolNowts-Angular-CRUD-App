@@ -2,7 +2,7 @@ import { Component, Output, EventEmitter, OnInit, ViewChild, output, Inject } fr
 import { ToolsAndActionsComponent } from '../tools-and-actions/tools-and-actions.component';
 import { FormControl, NgForm, NgModel } from '@angular/forms';
 import { DataService } from '../../services/data.service';
-import { blob } from 'stream/consumers';
+// import { blob } from 'stream/consumers';
 import { OutputTableComponent } from '../output-table/output-table.component';
 // import { EventEmitter } from 'stream';
 
@@ -51,15 +51,25 @@ export class NotesInputBoxComponent implements OnInit {
     if (t != null && c != null) {
       t.value = ''
       c.value = ''
-      }
-      this.data.sendEvent();
+    }
+    this.data.sendEvent();
+
+    // const resp = fetch("localhost:8080",{
+    //   method: "POST",
+    //   body: JSON.stringify({
+    //     id: this.id,
+    //     title: title,
+    //     description: description
+    //   })
+    // })
+
   }
 
 
   ShowOthers() {
-    const title = document.getElementById('title-input');
-    const bottomBar = document.getElementById('tools-and-actions');
-
+    const title = document.getElementById('title-input') as HTMLInputElement;
+    const bottomBar = document.getElementById('tools-and-actions') as HTMLInputElement;
+    console.log("CLicked")
     if ((title != undefined && title != null) && (bottomBar != undefined && bottomBar != null)) {
       title.style.display = 'flex';
       bottomBar.style.display = 'flex';

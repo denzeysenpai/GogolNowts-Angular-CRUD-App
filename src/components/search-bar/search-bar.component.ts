@@ -1,4 +1,4 @@
-import { Data } from '@angular/router';
+// import { Data } from '@angular/router';
 import { DataService } from '../../services/data.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { obj } from '../../services/data.service'

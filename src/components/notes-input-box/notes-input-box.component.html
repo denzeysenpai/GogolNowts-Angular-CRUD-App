@@ -1,17 +1,18 @@
+<main class="take-notes-box" name="NotesBox" id="NotesBox">
+  <span id="colorBlob"></span>
+  <form action="">
+    <div class="rows">
+      <input name="title-input" id="title-input" [placeholder]="placeholderTitle" #title>
+    </div>
+    <div class="rows">
+      <textarea ngModel name="notes-content" id="notes-content" [placeholder]="placeholderContent"
+        oninput="this.parentNode.dataset.value = this.value" rows="1" (click)="ShowOthers()" #description></textarea>
+    </div>
+    <div class="rows">
+      <!-- add tools and close component here -->
 
-  <main class="take-notes-box" name="NotesBox" id="NotesBox">
-    <span id="colorBlob"></span>
-    <form action="">
-      <div class="rows">
-            <input name="title-input" id="title-input" [placeholder]="placeholderTitle" #title>
-      </div>
-      <div class="rows">
-            <textarea ngModel name="notes-content" id="notes-content" [placeholder]="placeholderContent" oninput="this.parentNode.dataset.value = this.value" rows="1" (click)="ShowOthers()" #description></textarea>
-      </div>
-      <div class="rows">
-            <!-- add tools and close component here -->
-
-             <app-tools-and-actions (newItemEvent)="onSubmit($event, title.value, description.value)" id="tools-and-actions"></app-tools-and-actions>
-      </div>
-    </form>
-  </main>
+      <app-tools-and-actions (newItemEvent)="onSubmit($event, title.value, description.value)"
+        id="tools-and-actions"></app-tools-and-actions>
+    </div>
+  </form>
+</main>
